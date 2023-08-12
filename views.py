@@ -15,7 +15,7 @@ def search(request):
           
     # send the result to a template called search.html to process the result their. 
     return render(request, 'app/search.html', {"result":result}) 
-      # send the result to a template called search.html to process the result their. 
+    
    
    except:
     return redirect("index") # get back to the homepage if an error occurs. 
