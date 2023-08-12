@@ -1,21 +1,23 @@
+# Import necessary modules
 from django.shortcuts import redirect
 from .models import *
 from django.db.models import Q
 
+# Define the search function
 def search(request):
-   try:
-    # get the search term from the search bar where the name of the input field is search.
-    searchRequest = request.POST.get('search') 
-    
-    # the query that allows us to search more than one field in one query. 
-    searchable = Q(jobTitle__icontains= searchRequest) | Q(jobDescription__icontains= searchRequest)  
-   
-    # get all the results containting the search term.
-    result = JobDetails.objects.filter(searchable)
-          
-    # send the result to a template called search.html to process the result their. 
-    return render(request, 'app/search.html', {"result":result}) 
-    
-   
-   except:
-    return redirect("index") # get back to the homepage if an error occurs. 
+    try:
+        # Get the search query from the POST request
+        searchRequest = request.POST.get('search')
+        
+        # Define the conditions for searching in jobTitle and jobDescription using Q objects
+        searchable = Q(jobTitle__icontains=searchRequest) | Q(jobDescription__icontains=searchRequest)
+        
+        # Perform the search using the defined conditions
+        result = JobDetails.objects.filter(searchable)
+        
+        # Render the search results using the 'search.html' template and pass the results as context
+        return render(request, 'app/search.html', {"result": result})
+        
+    except:
+        # If an exception occurs redirect to the "index" (home page) page
+        return redirect("index")
