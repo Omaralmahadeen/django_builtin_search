@@ -7,7 +7,7 @@ def search(request):
     # get the search term from the search bar where the name of the input field is search.
     searchRequest = request.POST.get('search') 
     
-    #search in the job title and the job description fields of the table if they contain the search term. 
+    # the query that allows us to search more than one field in one query. 
     searchable = Q(jobTitle__icontains= searchRequest) | Q(jobDescription__icontains= searchRequest)  
    
     # get all the results containting the search term.
