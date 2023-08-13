@@ -19,5 +19,5 @@ def search(request):
         return render(request, 'app/search.html', {"result": result})
         
     except:
-        # If an exception occurs redirect to the "index" (home page) page
+        # If an exception occurs redirect to the "index" (home page) 
         return redirect("index")
